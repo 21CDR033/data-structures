@@ -1,0 +1,78 @@
+import java.util.Scanner;
+
+class TreeNode {
+    int data;
+    TreeNode left;
+    TreeNode right;
+
+    // Constructor
+    public TreeNode(int data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+public class BinaryTree {
+    TreeNode root;
+
+    // Constructor to initialize the root of the binary tree
+    public BinaryTree(int rootData) {
+        this.root = new TreeNode(rootData);
+    }
+
+    // Method to insert a new node into the binary tree
+    public void insert(int data) {
+        root = insertValue(root, data);
+    }
+
+    // Recursive method to insert a value into the binary tree
+    private TreeNode insertValue(TreeNode currentNode, int data) {
+        if (currentNode == null) {
+            return new TreeNode(data);
+        }
+
+        if (data < currentNode.data) {
+            currentNode.left = insertValue(currentNode.left, data);
+        } else if (data > currentNode.data) {
+            currentNode.right = insertValue(currentNode.right, data);
+        }
+
+        return currentNode;
+    }
+
+    // Method to perform inorder traversal starting from the root
+    public void inorderTraversal() {
+        performInorderTraversal(root);
+    }
+
+    // Recursive method for inorder traversal
+    private void performInorderTraversal(TreeNode currentNode) {
+        if (currentNode != null) {
+            performInorderTraversal(currentNode.left);
+            System.out.print(currentNode.data + " ");
+            performInorderTraversal(currentNode.right);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the root value: ");
+        int rootValue = scanner.nextInt();
+        BinaryTree tree = new BinaryTree(rootValue);
+
+        System.out.println("Enter the number of nodes: ");
+        int numNodes = scanner.nextInt();
+
+        for (int i = 0; i < numNodes; i++) {
+            System.out.println("Enter element " + (i + 1) + ": ");
+            int nodeValue = scanner.nextInt();
+            tree.insert(nodeValue);
+        }
+
+        System.out.println("Inorder Traversal: ");
+        tree.inorderTraversal();
+
+        scanner.close();
+    }
+}

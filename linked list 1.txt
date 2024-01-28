@@ -1,0 +1,53 @@
+package LearningModule;
+
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class CustomLinkedList {
+    Node head;
+
+    public CustomLinkedList() {
+        this.head = null;
+    }
+
+    // Method to insert a new node at the beginning of the linked list
+    public void addToFront(int data) {
+        Node newNode = new Node(data);
+
+        newNode.next = head;
+        head = newNode;
+    }
+
+    // Method to display the linked list
+    public void printList() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+}
+
+public class LinkedListExample {
+    public static void main(String[] args) {
+        CustomLinkedList linkedList = new CustomLinkedList();
+
+        // Adding elements to the linked list
+        linkedList.addToFront(1);
+        linkedList.addToFront(2);
+        linkedList.addToFront(3);
+        linkedList.addToFront(4);
+
+        // Displaying the linked list
+        System.out.println("Linked List Values: ");
+        linkedList.printList();
+    }
+}
